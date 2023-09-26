@@ -7,7 +7,6 @@ import { Link } from "react-router-dom"
 import { useRef,useEffect } from "react"
 import { useContext } from "react"
 import { AuthContext } from "../../contexts/AuthContext"
-import logo from '../../assets/logo.png'
 import { IoIosFootball } from 'react-icons/io'
 
 function Sidebar({isDrawerOpen, setIsDrawerOpen}:{isDrawerOpen: boolean , setIsDrawerOpen: any}) {

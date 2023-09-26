@@ -1,6 +1,6 @@
 import { AuthContext } from '../../contexts/AuthContext'
 import axios from 'axios'
-import { useContext, useState,useEffect } from 'react'
+import { useContext } from 'react'
 
 function ModelChannel({ setActive, getChannels}:{ setActive : any, getChannels: any}) {
     const {token} = useContext(AuthContext)

@@ -2,8 +2,7 @@ import Sidebar from "./components/global/sidebar"
 import { AuthContext } from "./contexts/AuthContext";
 import Routing from "./routes/Routing"
 import { useContext, useState } from "react";
-import Cookies from "js-cookie";
-import AddProfile from "./components/global/ChangePassword";
+
 function App() {
   const {user} = useContext(AuthContext);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false)

@@ -1,6 +1,6 @@
 import { AuthContext } from '../../contexts/AuthContext'
 import axios from 'axios'
-import { useContext, useState,useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 function ModelUser({ setActive, getUsers}:{ setActive : any, getUsers: any}) {

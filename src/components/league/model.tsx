@@ -1,10 +1,9 @@
 import { AuthContext } from '../../contexts/AuthContext'
 import axios from 'axios'
-import { useContext, useState,useEffect } from 'react'
+import { useContext, useState } from 'react'
 
 function ModelLeagues({ setActive, getLeagues}:{ setActive : any, getLeagues: any}) {
     const {token} = useContext(AuthContext)
-    const [leagues, setLeagues] = useState<any>([])
     const [error,setError] = useState<string>('')
     
 
