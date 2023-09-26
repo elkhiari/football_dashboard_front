@@ -15,7 +15,7 @@ function Muser() {
 
     const DeleteUser = async () => {
         try {
-            const res = await axios.delete(import.meta.env.VITE_API_URL+`users/delete/${deleteModel}`,{
+            await axios.delete(import.meta.env.VITE_API_URL+`users/delete/${deleteModel}`,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

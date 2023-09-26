@@ -15,7 +15,7 @@ function Channel() {
 
     const deleteChannels = async () => {
         try {
-            const res = await axios.delete(import.meta.env.VITE_API_URL+`channel/${deleteModel}`,{
+            await axios.delete(import.meta.env.VITE_API_URL+`channel/${deleteModel}`,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

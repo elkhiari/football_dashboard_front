@@ -37,7 +37,7 @@ function ModelTeams({ setActive, getTeams}:{ setActive : any, getTeams: any}) {
             return
         }
         try {
-            const res = await axios.post(import.meta.env.VITE_API_URL+'teams', data,{
+            await axios.post(import.meta.env.VITE_API_URL+'teams', data,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

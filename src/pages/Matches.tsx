@@ -16,7 +16,7 @@ function Matches() {
 
     const deleteMatches = async () => {
         try {
-            const res = await axios.delete(import.meta.env.VITE_API_URL+`matches/${deleteModel}`,{
+            await axios.delete(import.meta.env.VITE_API_URL+`matches/${deleteModel}`,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

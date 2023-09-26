@@ -18,7 +18,7 @@ function ModelLeagues({ setActive, getLeagues}:{ setActive : any, getLeagues: an
             return
         }
         try {
-            const res = await axios.post(import.meta.env.VITE_API_URL+'leagues', data,{
+            await axios.post(import.meta.env.VITE_API_URL+'leagues', data,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

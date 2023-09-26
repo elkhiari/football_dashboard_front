@@ -14,7 +14,7 @@ function ModelChannel({ setActive, getChannels}:{ setActive : any, getChannels: 
             link: e.target.link.value
         }
         try {
-            const res = await axios.post(import.meta.env.VITE_API_URL+'channel', data,{
+            await axios.post(import.meta.env.VITE_API_URL+'channel', data,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

@@ -25,7 +25,7 @@ function ModelUser({ setActive, getUsers}:{ setActive : any, getUsers: any}) {
             return
         }
         try {
-            const res = await axios.post(import.meta.env.VITE_API_URL+'users/add', data,{
+            await axios.post(import.meta.env.VITE_API_URL+'users/add', data,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

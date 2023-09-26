@@ -15,7 +15,7 @@ function Teams() {
 
     const deleteTeams = async () => {
         try {
-            const res = await axios.delete(import.meta.env.VITE_API_URL+`teams/${deleteModel}`,{
+            await axios.delete(import.meta.env.VITE_API_URL+`teams/${deleteModel}`,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
