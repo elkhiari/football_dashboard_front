@@ -110,9 +110,9 @@ function Matches() {
                             <div className='flex bg-slate-50 p-2 shadow rounded relative justify-around items-center'>
                                 {user.role === "admin" && <div className='w-6 h-6 whitespace-nowrap rounded-full bg-red-500 absolute top-2 right-2 cursor-pointer' onClick={()=>setDeleteModel(match._id)}></div>}
                                     <div className='flex flex-col items-center content-center w-2/5'>
-                                      <img src={match.homeTeam.logo} alt={match.homeTeam.name} className='h-20 w-20 object-contain' />
+                                      <img src={match.homeTeam?.logo} alt={match.homeTeam?.name} className='h-20 w-20 object-contain' />
                                       <h1 className='text-2xl font-bold text-center'>
-                                          {match.homeTeam.name}
+                                          {match.homeTeam?.name}
                                       </h1>
                                     </div>
                                     <div className='w-1/5 text-center'>
@@ -124,9 +124,9 @@ function Matches() {
                                       </span>
                                     </div>
                                     <div className='flex flex-col items-center content-center w-2/5'>
-                                      <img src={match.awayTeam.logo} alt={match.awayTeam.name} className='h-20 w-20 object-contain' />
+                                      <img src={match.awayTeam?.logo} alt={match.awayTeam?.name} className='h-20 w-20 object-contain' />
                                       <h1 className='text-2xl font-bold text-center'>
-                                          {match.awayTeam.name}
+                                          {match.awayTeam?.name}
                                       </h1>
                                     </div>
                                 
