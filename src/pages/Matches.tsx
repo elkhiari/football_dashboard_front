@@ -71,7 +71,6 @@ function Matches() {
           return 'Finished';
         }
       } else {
-        // Match is on a different date
         return matchDate.split('T')[0];
       }
     }

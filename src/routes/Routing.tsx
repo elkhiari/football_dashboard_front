@@ -29,9 +29,7 @@ function Routing() {
    
   return (
     <>
-        {
-            loading ?<Loading />
-        :
+        
         <Routes>
             <Route path="/login" element={token?<Navigate to={"/"} />:<Login/>} />
             <Route path="/" element={token?<Home />: <Navigate to={"/login"} />} />
@@ -42,7 +40,6 @@ function Routing() {
             <Route path="/users" element={token && user.role === "admin"?<Users />: <Navigate to={"/login"} />} />
             <Route path="/league" element={token?<League />: <Navigate to={"/login"} />} />
         </Routes>
-}
     </>
   )
 }
