@@ -9,13 +9,11 @@ import Matches from "../pages/Matches";
 import Resume from "../pages/Resume";
 import Users from "../pages/Users";
 import League from "../pages/League";
-import Loading from "../pages/loading";
 
 
 function Routing() {
     const {
     token,
-    loading,
     user
     } = useContext(AuthContext);
     const location = useLocation()
