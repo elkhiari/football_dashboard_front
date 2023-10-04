@@ -37,6 +37,7 @@ function Routing() {
             <Route path="/resume" element={token?<Resume />: <Navigate to={"/login"} />} />
             <Route path="/users" element={token && user.role === "admin"?<Users />: <Navigate to={"/login"} />} />
             <Route path="/league" element={token?<League />: <Navigate to={"/login"} />} />
+            <Route path="*" element={<h1>Hello</h1>} />
         </Routes>
     </>
   )
