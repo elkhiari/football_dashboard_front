@@ -16,13 +16,13 @@ function Routing() {
     token,
     user
     } = useContext(AuthContext);
-    const location = useLocation()
+    // const location = useLocation()
 
-    useEffect(() => {
-        if (location.pathname.split("/")[1] === "") {
-            document.title = "Home"
-        } else document.title = location.pathname.split("/")[1].charAt(0).toUpperCase() + location.pathname.split("/")[1].slice(1)
-    },[location.pathname])
+    // useEffect(() => {
+    //     if (location.pathname.split("/")[1] === "") {
+    //         document.title = "Home"
+    //     } else document.title = location.pathname.split("/")[1].charAt(0).toUpperCase() + location.pathname.split("/")[1].slice(1)
+    // },[location.pathname])
 
    
   return (

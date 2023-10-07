@@ -2,12 +2,12 @@ import { AuthContext } from '../../contexts/AuthContext'
 import axios from 'axios'
 import { useContext, useState,useEffect } from 'react'
 
-function ModelUser({ setActive, getMatches}:{ setActive : any, getMatches: any}) {
+function ModelUser({ setActive,match, getMatches}:{ setActive : any,match:any, getMatches: any}) {
     const {token} = useContext(AuthContext)
     const [data,setData] = useState<any>([])
     const [error,setError] = useState<string>('')
     
-    const addMatche = async(e : any) => {
+    const EditMatche = async(e : any) => {
         e.preventDefault()
         const data = {
             awayTeam: e.target.awayTeam.value,
@@ -34,13 +34,13 @@ function ModelUser({ setActive, getMatches}:{ setActive : any, getMatches: any})
             return
         }
         try {
-            await axios.post(import.meta.env.VITE_API_URL+'matches', data,{
+            await axios.put(import.meta.env.VITE_API_URL+'matches/'+match._id, data,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
             getMatches()
-            setActive(false)
+            setActive('')
         } catch (error) {
             console.log(error)
         }
@@ -65,13 +65,13 @@ function ModelUser({ setActive, getMatches}:{ setActive : any, getMatches: any})
 
   return (
     <div className='w-full flex place-content-center place-items-center min-h-screen  backdrop-blur-sm p-2 fixed top-0 left-0'>
-        <form className='w-full md:min-w-[300px] bg-white shadow rounded p-4' onSubmit={addMatche}>
+        <form className='w-full md:min-w-[300px] bg-white shadow rounded p-4' onSubmit={EditMatche}>
             <h1>
                 Add teams
             </h1>
             <div className='p-2'>
-                <select name="awayTeam" id="awayTeam" className='outline-none border border-gray-300 rounded p-2 w-full '>
-                    <option value="">Select away team</option>
+                <select defaultValue={match.awayTeam._id} name="awayTeam" id="awayTeam" className='outline-none border border-gray-300 rounded p-2 w-full '>
+                    <option value={match.awayTeam._id} >{match.awayTeam.name}</option>
                     {
                         data && data.teams &&
                         data.teams.map((teams:any)=>{
@@ -81,8 +81,8 @@ function ModelUser({ setActive, getMatches}:{ setActive : any, getMatches: any})
                 </select>
             </div>
             <div className='p-2'>
-                <select name="homeTeam" id="homeTeam" className='outline-none border border-gray-300 rounded p-2 w-full '>
-                    <option value="">Select home team</option>
+                <select name="homeTeam" defaultValue={match.homeTeam._id} id="homeTeam" className='outline-none border border-gray-300 rounded p-2 w-full '>
+                    <option value={match.homeTeam._id}>{match.homeTeam.name}</option>
                     {
                         data && data.teams &&
                         data.teams.map((teams:any)=>{
@@ -92,8 +92,8 @@ function ModelUser({ setActive, getMatches}:{ setActive : any, getMatches: any})
                 </select>
             </div>
             <div className='p-2'>
-                <select name="league" id="league" className='outline-none border border-gray-300 rounded p-2 w-full '>
-                    <option value="">Select league</option>
+                <select name="league" defaultValue={match.league._id} id="league" className='outline-none border border-gray-300 rounded p-2 w-full '>
+                    <option value={match.league._id}>{match.league.name}</option>
                     {
                         data && data.leagues &&
                         data.leagues.map((league:any)=>{
@@ -103,8 +103,8 @@ function ModelUser({ setActive, getMatches}:{ setActive : any, getMatches: any})
                 </select>
             </div>
             <div className='p-2'>
-                <select name="channel" id="channel" className='outline-none border border-gray-300 rounded p-2 w-full '>
-                    <option value="">Select channel</option>
+                <select name="channel" defaultValue={match.channel._id} id="channel" className='outline-none border border-gray-300 rounded p-2 w-full '>
+                    <option value={match.channel._id}>{match.channel.name}</option>
                     {
                         data && data.channels &&
                         data.channels.map((channel:any)=>{
@@ -114,7 +114,7 @@ function ModelUser({ setActive, getMatches}:{ setActive : any, getMatches: any})
                 </select>
             </div>
             <div className='p-2 flex gap-2'>
-            <input type="number" id="time" name="ho" min="0" max="24" required   className='outline-none border border-gray-300 rounded p-2 w-full' />
+            <input type="number"  id="time" name="ho" min="0" max="24" required   className='outline-none border border-gray-300 rounded p-2 w-full' />
             <input type="number" id="time" name="min" min="0" max="60" required   className='outline-none border border-gray-300 rounded p-2 w-full' />
             </div>
             <div className='p-2'>
@@ -129,9 +129,9 @@ function ModelUser({ setActive, getMatches}:{ setActive : any, getMatches: any})
             </div>}
             <div className='p-2'>
                 <button type='submit' className='text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 mb-2'>
-                    Add
+                    update
                 </button>
-                <button onClick={()=>setActive(false)}  className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 mb-2'>
+                <button onClick={()=>setActive('')}  className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 mb-2'>
                     Cancel
                 </button>
             </div>

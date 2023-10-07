@@ -1,12 +1,14 @@
 import {useState, useEffect, useContext} from 'react'
 import Modelmatches from '../components/matches/model'
+import ModelEdit from '../components/matches/modelEdit'
 import axios from 'axios'
 import { AuthContext } from '../contexts/AuthContext';
 import Confirm from '../components/global/Confirm';
 
 
 function Matches() {
-    const [modelActive, setModelActive] = useState<Boolean>(false)
+    const [modelActive, setModelActive] = useState<Boolean>('')
+    const [modelEditActive, setModelEditActive] = useState<string>(false)
     const {token, user} = useContext(AuthContext);
     const [deleteModel,setDeleteModel] = useState<string>('')
     const [Search, setSearch] = useState<any>('')
@@ -61,13 +63,10 @@ function Matches() {
         matchDateTime.getFullYear() === now.getFullYear()
       ) {
         if (now < matchDateTime) {
-          // Match is today and hasn't started yet
           return `Today at ${matchTime}`;
         } else if (now >= matchDateTime && now - matchDateTime <= 90 * 60 * 1000) {
-          // Match is today and playing
           return 'Playing';
         } else {
-          // Match is today and finished
           return 'Finished';
         }
       } else {
@@ -108,6 +107,7 @@ function Matches() {
                         .map((match:any) => (
                             <div className='flex bg-slate-50 p-2 shadow rounded relative justify-around items-center'>
                                 {user.role === "admin" && <div className='w-6 h-6 whitespace-nowrap rounded-full bg-red-500 absolute top-2 right-2 cursor-pointer' onClick={()=>setDeleteModel(match._id)}></div>}
+                                {user.role === "admin" && <div className='w-6 h-6 whitespace-nowrap rounded-full bg-blue-500 absolute top-2 right-10 cursor-pointer' onClick={()=>setModelEditActive(match)}></div>}
                                     <div className='flex flex-col items-center content-center w-2/5'>
                                       <img src={match.homeTeam?.logo} alt={match.homeTeam?.name} className='h-20 w-20 object-contain' />
                                       <h1 className='text-2xl font-bold text-center'>
@@ -117,7 +117,6 @@ function Matches() {
                                     <div className='w-1/5 text-center'>
                                       <span>
                                         {
-                                          // new Date(match.date).toLocaleDateString() === new Date().toLocaleDateString() ? match.time : new Date(match.date).toLocaleDateString() === new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toLocaleDateString() ? 'Tomorrow' : new Date(match.date).toLocaleDateString() === new Date(new Date().getTime() - 24 * 60 * 60 * 1000).toLocaleDateString() ? 'Yesterday' : new Date(match.date).toLocaleDateString()
                                           getMatchStatus(match.date, match.time)
                                         }
                                       </span>
@@ -137,6 +136,7 @@ function Matches() {
             </div>
         {deleteModel && <Confirm clickMe={deleteMatches} setDeleteModel={setDeleteModel} />}
         {modelActive &&  <Modelmatches  setActive={setModelActive} getMatches={getMatches} />}
+        {modelEditActive &&  <ModelEdit match={modelEditActive} setActive={setModelEditActive} getMatches={getMatches} />}
     </div>
     </>
   )
