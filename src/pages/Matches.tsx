@@ -8,7 +8,7 @@ import Confirm from '../components/global/Confirm';
 
 function Matches() {
     const [modelActive, setModelActive] = useState<Boolean>('')
-    const [modelEditActive, setModelEditActive] = useState<string>(false)
+    const [modelEditActive, setModelEditActive] = useState<string>('')
     const {token, user} = useContext(AuthContext);
     const [deleteModel,setDeleteModel] = useState<string>('')
     const [Search, setSearch] = useState<any>('')
