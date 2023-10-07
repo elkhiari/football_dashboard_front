@@ -1,5 +1,6 @@
 import {useState, useEffect, useContext} from 'react'
 import ModelChannels from '../components/Channel/model'
+import EditModelChannels from '../components/Channel/modelEdit'
 import axios from 'axios'
 import { AuthContext } from '../contexts/AuthContext';
 import Confirm from '../components/global/Confirm';
@@ -9,6 +10,7 @@ function Channel() {
     const [modelActive, setModelActive] = useState<Boolean>(false)
     const {token, user} = useContext(AuthContext);
     const [deleteModel,setDeleteModel] = useState<string>('')
+    const [modelEditActive,setModelEditActive] = useState<string>('')
     const [Search, setSearch] = useState<any>('')
     const [channels, setChannels] = useState<any>([])
     const [loading, setLoading] = useState<Boolean>(true)
@@ -74,6 +76,7 @@ function Channel() {
                         .map((channel:any) => (
                           <div className='bg-white relative whitespace-nowrap flex md:flex-col   border rounded shadow p-2 animation md:place-content-center place-items-center space-x-2 md:space-x-0'>
                                 {user.role === "admin" && <div className='w-6 h-6 rounded-full bg-red-500 absolute top-2 right-2 cursor-pointer' onClick={()=>setDeleteModel(channel._id)}></div>}
+                                {user.role === "admin" && <div className='w-6 h-6 rounded-full bg-blue-500 absolute top-2 right-6 cursor-pointer' onClick={()=>setModelEditActive(channel)}></div>}
                                 <img src={channel.logo} alt={channel.name} className='h-28 w-28 object-contain' />
                                 <div>
                                     <h1 className='text-2xl font-bold mb-2'>
@@ -89,6 +92,7 @@ function Channel() {
             </div>
         {deleteModel && <Confirm clickMe={deleteChannels} setDeleteModel={setDeleteModel} />}
         {modelActive &&  <ModelChannels  setActive={setModelActive} getChannels={getChannels} />}
+        {modelEditActive &&  <EditModelChannels channel={modelEditActive}  setActive={setModelEditActive} getChannels={getChannels} />}
     </div>
     </>
   )
