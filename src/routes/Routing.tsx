@@ -1,6 +1,6 @@
-import { Route , Routes, Navigate,useLocation  } from "react-router-dom"
+import { Route , Routes, Navigate  } from "react-router-dom"
 import Login from '../pages/Login'
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { AuthContext } from "../contexts/AuthContext"
 import Home from "../pages/Home";
 import Teams from "../pages/Teams";
@@ -16,13 +16,6 @@ function Routing() {
     token,
     user
     } = useContext(AuthContext);
-    // const location = useLocation()
-
-    // useEffect(() => {
-    //     if (location.pathname.split("/")[1] === "") {
-    //         document.title = "Home"
-    //     } else document.title = location.pathname.split("/")[1].charAt(0).toUpperCase() + location.pathname.split("/")[1].slice(1)
-    // },[location.pathname])
 
    
   return (
