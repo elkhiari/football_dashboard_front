@@ -27,7 +27,7 @@ function ModelChannel({ setActive, getChannels}:{ setActive : any, getChannels: 
     }
 
   return (
-    <div className='w-full  min-h-screen  backdrop-blur-sm p-2 fixed top-0 left-0'>
+    <div className='w-full  min-h-screen  backdrop-blur-sm p-2 absolute top-0 left-0'>
         <form className='w-full md:min-w-[300px] bg-white shadow rounded p-4' onSubmit={addTeam}>
             <h1>
                 Add Channel
