@@ -27,7 +27,7 @@ function ModelChannel({ setActive,channel, getChannels}:{ setActive : any, chann
     }
 
   return (
-    <div className='w-full flex place-content-center place-items-center min-h-screen  backdrop-blur-sm p-2 fixed top-0 left-0'>
+    <div className='w-full  min-h-screen  backdrop-blur-sm p-2 fixed top-0 left-0'>
         <form className='w-full  md:min-w-[300px] bg-white shadow rounded p-4' onSubmit={update}>
             <h1>
                 Add Channel
