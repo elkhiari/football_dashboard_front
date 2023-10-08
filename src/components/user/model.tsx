@@ -38,7 +38,7 @@ function ModelUser({ setActive, getUsers}:{ setActive : any, getUsers: any}) {
     }
 
   return (
-    <div className='w-full flex place-content-center place-items-center min-h-screen  backdrop-blur-sm p-2 fixed top-0 left-0'>
+    <div className='w-full  min-h-screen  backdrop-blur-sm p-2 absolute top-0 left-0'>
         <form className='w-full md:min-w-[300px] bg-white shadow rounded p-4' onSubmit={addUser}>
             <h1>
                 Add teams
