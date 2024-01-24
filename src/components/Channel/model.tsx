@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from 'react'
 function ModelChannel({ setActive, getChannels}:{ setActive : any, getChannels: any}) {
     const {token} = useContext(AuthContext)
     const [categories, setCategories] = useState<any>([])
-    const [loading, setLoading] = useState<Boolean>(true)
 
     
 
@@ -36,7 +35,6 @@ function ModelChannel({ setActive, getChannels}:{ setActive : any, getChannels: 
 
 
     const getCategory = async () => {
-        setLoading(true)
         try {
             const res = await axios.get(import.meta.env.VITE_API_URL+'category',{
                 headers: {
@@ -46,8 +44,6 @@ function ModelChannel({ setActive, getChannels}:{ setActive : any, getChannels: 
             setCategories(res.data)
         } catch (error) {
             console.log(error)
-        } finally {
-            setLoading(false)
         }
     }
 
