@@ -1,6 +1,6 @@
 import { AuthContext } from '../../contexts/AuthContext'
 import axios from 'axios'
-import { useContext, useEffect, useState } from 'react'
+import { useContext} from 'react'
 
 function Modelcategory({ setActive, getcategory}:{ setActive : any, getcategory: any}) {
     const {token} = useContext(AuthContext)
