@@ -1,7 +1,7 @@
 import {IoMdFootball} from 'react-icons/io'
 import {RiTeamFill} from 'react-icons/ri'
 import {PiTelevisionSimpleDuotone} from 'react-icons/pi'
-import {TbPlayFootball} from 'react-icons/tb'
+import {TbCategory, TbPlayFootball} from 'react-icons/tb'
 import {TfiCup} from 'react-icons/tfi'
 import { Link } from "react-router-dom"
 import { useRef,useEffect } from "react"
@@ -38,6 +38,13 @@ function Sidebar({isDrawerOpen, setIsDrawerOpen}:{isDrawerOpen: boolean , setIsD
                 </Link>
                 <ul className="space-y-2 font-medium">
                     
+                    <li>
+                        <Link to="category" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <TbCategory className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                        <span className="flex-1 ml-3 whitespace-nowrap">Category</span>
+                        {/* <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span> */}
+                        </Link>
+                    </li>
                     <li>
                         <Link to="league" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <TfiCup className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />

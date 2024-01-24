@@ -2,10 +2,8 @@ import { AuthContext } from '../../contexts/AuthContext'
 import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 
-function ModelChannel({ setActive, getChannels}:{ setActive : any, getChannels: any}) {
+function Modelcategory({ setActive, getcategory}:{ setActive : any, getcategory: any}) {
     const {token} = useContext(AuthContext)
-    const [categories, setCategories] = useState<any>([])
-    const [loading, setLoading] = useState<Boolean>(true)
 
     
 
@@ -14,48 +12,27 @@ function ModelChannel({ setActive, getChannels}:{ setActive : any, getChannels: 
         const data = {
             name: e.target.name.value,
             logo: e.target.logo.value,
-            link: e.target.link.value,
-            category: e.target.category.value
+            link: e.target.description.value
         }
         try {
-            await axios.post(import.meta.env.VITE_API_URL+'channel', data,{
+            await axios.post(import.meta.env.VITE_API_URL+'category', data,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
-            getChannels()
+            getcategory()
             setActive(false)
         } catch (error) {
             console.log(error)
         }
     }
 
-    useEffect(()=>{
-        getCategory()
-    },[])
-
-
-    const getCategory = async () => {
-        setLoading(true)
-        try {
-            const res = await axios.get(import.meta.env.VITE_API_URL+'category',{
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            setCategories(res.data)
-        } catch (error) {
-            console.log(error)
-        } finally {
-            setLoading(false)
-        }
-    }
 
   return (
     <div className='w-full  min-h-screen  backdrop-blur-sm p-2 absolute top-0 left-0'>
         <form className='w-full md:min-w-[300px] bg-white shadow rounded p-4' onSubmit={addTeam}>
             <h1>
-                Add Channel
+                Add category
             </h1>
             <div className='p-2'>
                 <input required name='name' type="text" placeholder="Name" className='outline-none border border-gray-300 rounded p-2 w-full' />
@@ -64,17 +41,7 @@ function ModelChannel({ setActive, getChannels}:{ setActive : any, getChannels: 
                 <input required name='logo' type="text" placeholder="Logo" className='outline-none border border-gray-300 rounded p-2 w-full' />
             </div>
             <div className='p-2'>
-                <input required name='link' type="text" placeholder="Link" className='outline-none border border-gray-300 rounded p-2 w-full' />
-            </div>
-            <div  className='p-2'>
-                <select name='category' required className='outline-none border border-gray-300 rounded p-2 w-full'>
-                    <option value='' disabled selected>Select Category</option>
-                    {categories && categories.map((category:any)=>{
-                        
-                        return <option value={category._id}>{category.name}</option>
-                    })}
-                </select>
-
+                <input required name='description' type="text" placeholder="description" className='outline-none border border-gray-300 rounded p-2 w-full' />
             </div>
             
             <div className='p-2'>
@@ -90,4 +57,4 @@ function ModelChannel({ setActive, getChannels}:{ setActive : any, getChannels: 
   )
 }
 
-export default ModelChannel
+export default Modelcategory

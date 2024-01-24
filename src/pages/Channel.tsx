@@ -45,6 +45,9 @@ function Channel() {
         }
     }
 
+
+
+
     useEffect(()=>{
         getChannels()
         
@@ -72,7 +75,7 @@ function Channel() {
                     {
                         channels &&
                         channels
-                        .filter((channel:any) => channel.name.toLowerCase().includes(Search.toLowerCase()))
+                        .filter((channel:any) => channel.name.toLowerCase().includes(Search.toLowerCase()) || channel.category.name.toLowerCase().includes(Search.toLowerCase()))
                         .map((channel:any) => (
                           <div className='bg-white relative whitespace-nowrap flex md:flex-col   border rounded shadow p-2 animation md:place-content-center place-items-center space-x-2 md:space-x-0'>
                                 {user.role === "admin" && <div className='w-6 h-6 rounded-full bg-red-500 absolute top-2 right-2 cursor-pointer' onClick={()=>setDeleteModel(channel._id)}></div>}

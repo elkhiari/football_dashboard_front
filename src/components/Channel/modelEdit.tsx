@@ -1,9 +1,12 @@
 import { AuthContext } from '../../contexts/AuthContext'
 import axios from 'axios'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 function ModelChannel({ setActive,channel, getChannels}:{ setActive : any, channel:any, getChannels: any}) {
     const {token} = useContext(AuthContext)
+    const [categories, setCategories] = useState<any>([])
+    const [loading, setLoading] = useState<Boolean>(true)
+
     
 
     const update = async(e : any) => {
@@ -11,7 +14,8 @@ function ModelChannel({ setActive,channel, getChannels}:{ setActive : any, chann
         const data = {
             name: e.target.name.value,
             logo: e.target.logo.value,
-            link: e.target.link.value
+            link: e.target.link.value,
+            category: e.target.category.value,
         }
         try {
             await axios.put(import.meta.env.VITE_API_URL+'channel/'+channel._id, data,{
@@ -23,6 +27,27 @@ function ModelChannel({ setActive,channel, getChannels}:{ setActive : any, chann
             setActive('')
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    useEffect(()=>{
+        getCategory()
+    },[])
+
+
+    const getCategory = async () => {
+        setLoading(true)
+        try {
+            const res = await axios.get(import.meta.env.VITE_API_URL+'category',{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            setCategories(res.data)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -40,6 +65,17 @@ function ModelChannel({ setActive,channel, getChannels}:{ setActive : any, chann
             </div>
             <div className='p-2'>
                 <input name='link' defaultValue={channel.link} type="text" placeholder="Link" className='outline-none border border-gray-300 rounded p-2 w-full' />
+            </div>
+
+            <div  className='p-2'>
+                <select name='category' required className='outline-none border border-gray-300 rounded p-2 w-full'>
+                    <option value='' disabled >Select Category</option>
+                    {categories && categories.map((category:any)=>{
+                        
+                        return <option value={category._id} selected={category._id == channel.category._id}>{category.name}</option>
+                    })}
+                </select>
+
             </div>
             
             <div className='p-2'>
