@@ -4,6 +4,8 @@ import ModelEdit from '../components/matches/modelEdit'
 import axios from 'axios'
 import { AuthContext } from '../contexts/AuthContext';
 import Confirm from '../components/global/Confirm';
+import Show from '../components/showResum/show';
+import NotificationMatch from '../components/matches/notification';
 
 
 function Matches() {
@@ -15,6 +17,8 @@ function Matches() {
     const [filter,setFilter] = useState<string>('all')
     const [matches, setMatches] = useState<any>([])
     const [loading, setLoading] = useState<Boolean>(true)
+    const [lien, setLien] = useState<any>('')
+    const [noti, setNoti] = useState<any>('')
 
     const deleteMatches = async () => {
         try {
@@ -92,6 +96,8 @@ function Matches() {
                     <option value="today">Today</option>
                     <option value="tomorrow">Tomorrow</option>
                     <option value="yesterday">Yesterday</option>
+                    <option value="today?resume=true">today resume</option>
+                    <option value="yesterday?resume=true">yesterday resume</option>
                 </select>
             </div>
         <div className='w-full  '>
@@ -99,15 +105,19 @@ function Matches() {
             <div className='w-full  min-h-[300px] flex place-content-center place-items-center'>
                 <div className="h-8 animate-bounce rounded w-8 bg-gray-900"></div>
             </div>:
-            <div className='grid grid-cols-1  lg:grid-cols-2 2xl:grid-cols-3  gap-4'>
+            <div className='grid grid-cols-1  lg:grid-cols-2 3xl:grid-cols-3  gap-4'>
                     {
                         matches &&
                         matches
                         .filter((match:any) => match.homeTeam.name.toLowerCase().includes(Search.toLowerCase()) ||  match.awayTeam.name.toLowerCase().includes(Search.toLowerCase()))
                         .map((match:any) => (
-                            <div className='flex bg-slate-50 p-2 shadow rounded relative justify-around items-center'>
-                                {user.role === "admin" && <div className='w-6 h-6 whitespace-nowrap rounded-full bg-red-500 absolute top-2 right-2 cursor-pointer' onClick={()=>setDeleteModel(match._id)}></div>}
-                                {user.role === "admin" && <div className='w-6 h-6 whitespace-nowrap rounded-full bg-blue-500 absolute top-2 right-10 cursor-pointer' onClick={()=>setModelEditActive(match)}></div>}
+                            <div  className='flex bg-slate-50 p-2 shadow rounded relative justify-around items-center'>
+                               <div className='absolute top-2 right-2 flex space-x-3 '>
+                                  <div className='w-6 h-6 whitespace-nowrap rounded-full bg-black  cursor-pointer' onClick={()=>setNoti(match)}></div>
+                                  {match.resume && <div className='w-6 h-6 whitespace-nowrap rounded-full bg-green-500  cursor-pointer' onClick={()=>setLien(match.resume)}></div>}
+                                  {user.role === "admin" && <div className='w-6 h-6 whitespace-nowrap rounded-full bg-blue-500  cursor-pointer' onClick={()=>setModelEditActive(match)}></div>}
+                                  {user.role === "admin" && <div className='w-6 h-6 whitespace-nowrap rounded-full bg-red-500  cursor-pointer' onClick={()=>setDeleteModel(match._id)}></div>}
+                               </div>
                                     <div className='flex flex-col items-center content-center w-2/5'>
                                       <img src={match.homeTeam?.logo} alt={match.homeTeam?.name} className='h-20 w-20 object-contain' />
                                       <h1 className='text-2xl font-bold text-center'>
@@ -115,11 +125,18 @@ function Matches() {
                                       </h1>
                                     </div>
                                     <div className='w-1/5 text-center'>
-                                      <span>
+                                      <div>
                                         {
                                           getMatchStatus(match.date, match.time)
                                         }
-                                      </span>
+                                      </div>
+                                      {
+                                        (getMatchStatus(match.date, match.time) == 'Playing' || getMatchStatus(match.date, match.time) == "Finished") && (
+                                          <div>
+                                            {match.homeTeamScore} - {match.awayTeamScore}
+                                          </div>
+                                          )
+                                      }
                                     </div>
                                     <div className='flex flex-col items-center content-center w-2/5'>
                                       <img src={match.awayTeam?.logo} alt={match.awayTeam?.name} className='h-20 w-20 object-contain' />
@@ -132,11 +149,16 @@ function Matches() {
                         ))
                     }
                 </div>
+
                 }
+               {lien && <div>
+                  <Show lien={lien} setLien={setLien}/>
+                </div>}
             </div>
         {deleteModel && <Confirm clickMe={deleteMatches} setDeleteModel={setDeleteModel} />}
         {modelActive &&  <Modelmatches  setActive={setModelActive} getMatches={getMatches} />}
         {modelEditActive &&  <ModelEdit match={modelEditActive} setActive={setModelEditActive} getMatches={getMatches} />}
+        {noti && <NotificationMatch match={noti} setMatch={setNoti} getMatchStatus={getMatchStatus} />}
     </div>
     </>
   )

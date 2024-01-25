@@ -50,8 +50,8 @@ function ModelTeams({ setActive, getTeams}:{ setActive : any, getTeams: any}) {
     }
 
   return (
-    <div className='w-full  min-h-screen  backdrop-blur-sm p-2 absolute top-0 left-0'>
-        <form className='w-full md:min-w-[300px] bg-white shadow rounded p-4' onSubmit={addTeam}>
+    <div className='w-full  min-h-screen z-50 grid place-items-center bg-black/30  backdrop-blur-sm p-2 fixed top-0 left-0'>
+        <form className='w-full md:min-w-[300px] bg-white shadow rounded p-4 md:max-w-xl' onSubmit={addTeam}>
             <h1>
                 Add teams
             </h1>

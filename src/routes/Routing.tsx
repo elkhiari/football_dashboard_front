@@ -7,7 +7,7 @@ import Teams from "../pages/Teams";
 import Channel from "../pages/Channel";
 import Matches from "../pages/Matches";
 import Category from "../pages/category";
-import Resume from "../pages/Resume";
+import Resume from "../pages/Movie";
 import Users from "../pages/Users";
 import League from "../pages/League";
 

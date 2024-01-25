@@ -16,6 +16,8 @@ function ModelUser({ setActive, getMatches}:{ setActive : any, getMatches: any})
             time :  e.target.ho.value + ':' + e.target.min.value,
             date :  e.target.date.value,
             league:  e.target.league.value,
+            resume:  e.target.resume.value,
+
         }
         if (!data.awayTeam || !data.homeTeam || !data.channel || !data.time || !data.date || !data.league) {
             setError('Please fill all the fields')
@@ -61,11 +63,11 @@ function ModelUser({ setActive, getMatches}:{ setActive : any, getMatches: any})
 
     useEffect(()=>{
         getData()
-    })
+    },[])
 
   return (
-    <div className='w-full  min-h-screen  backdrop-blur-sm p-2 absolute top-0 left-0'>
-        <form className='w-full md:min-w-[300px] bg-white shadow rounded p-4' onSubmit={addMatche}>
+    <div className='w-full  min-h-screen z-50 grid place-items-center bg-black/30  backdrop-blur-sm p-2 fixed top-0 left-0'>
+        <form className='w-full md:min-w-[300px] bg-white shadow rounded p-4 md:max-w-xl' onSubmit={addMatche}>
             <h1>
                 Add teams
             </h1>
@@ -114,11 +116,18 @@ function ModelUser({ setActive, getMatches}:{ setActive : any, getMatches: any})
                 </select>
             </div>
             <div className='p-2 flex gap-2'>
-            <input type="number" id="time" name="ho" min="0" max="24" required   className='outline-none border border-gray-300 rounded p-2 w-full' />
-            <input type="number" id="time" name="min" min="0" max="60" required   className='outline-none border border-gray-300 rounded p-2 w-full' />
+            <input type="number" placeholder='houre' id="time" name="ho" min="0" max="24" required   className='outline-none border border-gray-300 rounded p-2 w-full' />
+            <input type="number" id="time" placeholder='minutes' name="min" min="0" max="60" required   className='outline-none border border-gray-300 rounded p-2 w-full' />
             </div>
             <div className='p-2'>
                 <input name='date' type="date"  className='outline-none border border-gray-300 rounded p-2 w-full' />
+            </div>
+            <div className='p-2 flex gap-2'>
+                <input type="number" id="homeTeamScore" name="awayTeamScore"   className='outline-none border border-gray-300 rounded p-2 w-full' />
+                <input type="number" id="awayTeamScore" name="awayTeamScore"   className='outline-none border border-gray-300 rounded p-2 w-full' />
+            </div>
+            <div className='p-2'>
+                <input name='resume' type="text"  className='outline-none border border-gray-300 rounded p-2 w-full' />
             </div>
             <div className='p-2 relative'>
                 

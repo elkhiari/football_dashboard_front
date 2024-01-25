@@ -27,7 +27,7 @@ function Modelcategory({ setActive,category, getcategory}:{ setActive : any, cat
     }
 
   return (
-    <div className='w-full  min-h-screen  backdrop-blur-sm p-2 absolute top-0 left-0'>
+    <div className='w-full  min-h-screen z-50 grid place-items-center bg-black/30  backdrop-blur-sm p-2 fixed top-0 left-0'>
         <form className='w-full  md:min-w-[300px] bg-white shadow rounded p-4' onSubmit={update}>
             <h1>
                 Add Category

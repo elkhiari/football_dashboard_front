@@ -16,6 +16,9 @@ function ModelUser({ setActive,match, getMatches}:{ setActive : any,match:any, g
             time :  e.target.ho.value + ':' + e.target.min.value,
             date :  e.target.date.value,
             league:  e.target.league.value,
+            resume:  e.target.resume.value,
+            homeTeamScore: e.target.homeTeamScore.value,
+            awayTeamScore: e.target.awayTeamScore.value
         }
         if (!data.awayTeam || !data.homeTeam || !data.channel || !data.time || !data.date || !data.league) {
             setError('Please fill all the fields')
@@ -61,21 +64,19 @@ function ModelUser({ setActive,match, getMatches}:{ setActive : any,match:any, g
 
     useEffect(()=>{
         getData()
-    })
+    },[])
 
   return (
-    <div className='w-full absolute min-h-screen  backdrop-blur-sm p-2  top-0 left-0'>
-        <form className='w-full md:min-w-[300px] bg-white shadow rounded p-4' onSubmit={EditMatche}>
+    <div className='w-full  min-h-screen z-50 grid place-items-center bg-black/30  backdrop-blur-sm p-2 fixed top-0 left-0'>
+        <form className='w-full md:min-w-[300px] bg-white shadow rounded p-4 md:max-w-xl' onSubmit={EditMatche}>
             <h1>
                 Add teams
             </h1>
             <div className='p-2'>
-                <select defaultValue={match.awayTeam._id} name="awayTeam" id="awayTeam" className='outline-none border border-gray-300 rounded p-2 w-full '>
-                    <option value={match.awayTeam._id} >{match.awayTeam.name}</option>
-                    {
+                <select defaultValue={match.awayTeam._id} name="awayTeam" id="awayTeam" className='outline-none border border-gray-300 rounded p-2 w-full '>                    {
                         data && data.teams &&
                         data.teams.map((teams:any)=>{
-                            return <option value={teams._id}>{teams.name}</option>
+                            return <option value={teams._id} selected={teams._id == match.awayTeam._id}>{teams.name}</option>
                         })
                     }
                 </select>
@@ -86,7 +87,7 @@ function ModelUser({ setActive,match, getMatches}:{ setActive : any,match:any, g
                     {
                         data && data.teams &&
                         data.teams.map((teams:any)=>{
-                            return <option value={teams._id}>{teams.name}</option>
+                            return <option value={teams._id} selected={teams._id == match.homeTeam._id}>{teams.name}</option>
                         })
                     }
                 </select>
@@ -97,32 +98,40 @@ function ModelUser({ setActive,match, getMatches}:{ setActive : any,match:any, g
                     {
                         data && data.leagues &&
                         data.leagues.map((league:any)=>{
-                            return <option value={league._id}>{league.name}</option>
+                            return <option value={league._id} selected={league._id == match.league._id}>{league.name}</option>
                         })
                     }
                 </select>
             </div>
             <div className='p-2'>
                 <select name="channel" defaultValue={match.channel._id} id="channel" className='outline-none border border-gray-300 rounded p-2 w-full '>
-                    <option value={match.channel._id}>{match.channel.name}</option>
                     {
                         data && data.channels &&
                         data.channels.map((channel:any)=>{
-                            return <option value={channel._id}>{channel.name}</option>
+                            return <option value={channel._id} selected={channel._id == match.channel._id}>{channel.name}</option>
                         })
                     }
                 </select>
             </div>
             <div className='p-2 flex gap-2'>
-            <input type="number"  id="time" name="ho" min="0" max="24" required   className='outline-none border border-gray-300 rounded p-2 w-full' />
-            <input type="number" id="time" name="min" min="0" max="60" required   className='outline-none border border-gray-300 rounded p-2 w-full' />
+                <input type="number" defaultValue={match.time.split(":")[0]}  id="time" name="ho" min="0" max="24" required   className='outline-none border border-gray-300 rounded p-2 w-full' />
+                <input type="number" defaultValue={match.time.split(":")[1]} id="time" name="min" min="0" max="60" required   className='outline-none border border-gray-300 rounded p-2 w-full' />
             </div>
             <div className='p-2'>
-                <input name='date' type="date"  className='outline-none border border-gray-300 rounded p-2 w-full' />
+                <input name='date' type="date" defaultValue={match.date.split("T")[0].split("/").reverse().join("-")}  className='outline-none border border-gray-300 rounded p-2 w-full' />
             </div>
-            <div className='p-2 relative'>
-                
-                
+            <div className='p-2'>
+                <input placeholder='resume link' name='resume' type="text" defaultValue={match.resume} className='outline-none border border-gray-300 rounded p-2 w-full' />
+            </div>
+            <div className='p-2 flex gap-2'>
+                <div className='w-full'>
+                    <label htmlFor="homeTeamScore">{match.homeTeam.name}</label>
+                    <input type="string" defaultValue={match.homeTeamScore} id="homeTeamScore" placeholder={match.homeTeam.name} name="homeTeamScore"   className='outline-none border border-gray-300 rounded p-2 w-full' />
+                </div>
+                <div className='w-full'>
+                    <label htmlFor="awayTeamScore">{match.awayTeam.name}</label>
+                    <input type="string" defaultValue={match.awayTeamScore} id="awayTeamScore" placeholder={match.awayTeam.name} name="awayTeamScore"   className='outline-none border border-gray-300 rounded p-2 w-full' />
+                </div>
             </div>
             {error && <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                 {error}
