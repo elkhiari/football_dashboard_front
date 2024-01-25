@@ -39,7 +39,7 @@ function ModelUser({ setActive, getUsers}:{ setActive : any, getUsers: any}) {
 
   return (
     <div className='w-full  min-h-screen z-50 grid place-items-center bg-black/30  backdrop-blur-sm p-2 fixed top-0 left-0'>
-        <form className='w-full  min-h-screen z-50 grid place-items-center bg-black/30  backdrop-blur-sm p-2 fixed top-0 left-0' onSubmit={addUser}>
+        <form className='w-full md:min-w-[300px] bg-white shadow rounded p-4 md:max-w-xl' onSubmit={addUser}>
             <h1>
                 Add teams
             </h1>
@@ -51,7 +51,7 @@ function ModelUser({ setActive, getUsers}:{ setActive : any, getUsers: any}) {
             </div>
             <div className='p-2 relative'>
                 <input name='password' type={showPassword} onChange={(e)=>setPassword(e.target.value)} value={password} placeholder="password" className='outline-none p-2 pr-8 relative border border-gray-300 rounded w-full' />
-                <button className='absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer'>
+                <button type='button' className='absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer'>
 
                 {
                     showPassword === "password" ?
@@ -66,7 +66,7 @@ function ModelUser({ setActive, getUsers}:{ setActive : any, getUsers: any}) {
                 <button type='submit' className='text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 mb-2'>
                     Add
                 </button>
-                <button onClick={()=>setActive(false)}  className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 mb-2'>
+                <button onClick={()=>setActive(false)} type='button'  className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 mb-2'>
                     Cancel
                 </button>
             </div>

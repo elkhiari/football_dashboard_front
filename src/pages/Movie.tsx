@@ -72,6 +72,23 @@ function Movie() {
 }
 
 const Card = ({movie, setToEdit, setTodelete, setLien}:any) => {
+  const {token} = useContext(AuthContext)
+  const pushNotif = async () => {
+    try {
+        await axios.post(import.meta.env.VITE_API_URL+'notification/push', {
+            title:  "متاح على تطبيقنا | " + movie.title,
+            body: movie.description,
+            large_picture: movie.thumbnail
+          },{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        alert("Notification sent")
+    } catch (error) {
+        console.log(error)
+    }
+}
   return (
     <div  className="flex flex-col place-items-center group relative">
       <div  className="w-32 lg:w-40 xl:w-48 bg-[#100f12] rounded-xl relative shadow-xl overflow-hidden">
@@ -79,6 +96,7 @@ const Card = ({movie, setToEdit, setTodelete, setLien}:any) => {
           <div className='w-6 h-6 whitespace-nowrap rounded-full bg-blue-500  cursor-pointer' onClick={()=>setToEdit(movie)}></div>
           <div className='w-6 h-6 whitespace-nowrap rounded-full bg-red-500  cursor-pointer' onClick={()=>setTodelete(movie._id)}></div>
           <div className='w-6 h-6 whitespace-nowrap rounded-full bg-green-500  cursor-pointer' onClick={()=>setLien(movie.link)}></div>
+          <div className='w-6 h-6 whitespace-nowrap rounded-full bg-yellow-500  cursor-pointer' onClick={pushNotif}></div>
       </div>
           <img src={movie.thumbnail} className="w-full group-hover:opacity-50 duration-300 rounded-t-xl" />
           <div className="absolute bg-gradient-to-l from-[#100f12] group-hover:opacity-100 opacity-0 duration-300 top-0 right-0 h-full w-1/2 z-10"></div>

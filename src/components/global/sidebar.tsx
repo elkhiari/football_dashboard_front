@@ -1,5 +1,5 @@
 import {IoMdFootball} from 'react-icons/io'
-import {RiTeamFill} from 'react-icons/ri'
+import {RiMovie2Fill, RiTeamFill} from 'react-icons/ri'
 import {PiTelevisionSimpleDuotone} from 'react-icons/pi'
 import {TbCategory, TbPlayFootball} from 'react-icons/tb'
 import {TfiCup} from 'react-icons/tfi'
@@ -74,8 +74,8 @@ function Sidebar({isDrawerOpen, setIsDrawerOpen}:{isDrawerOpen: boolean , setIsD
                     </li>
                     <li>
                         <Link to="resume" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <TbPlayFootball className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                        <span className="flex-1 ml-3 whitespace-nowrap">Resume</span>
+                        <RiMovie2Fill className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                        <span className="flex-1 ml-3 whitespace-nowrap">Movies</span>
                         </Link>
                     </li>
                     {user.role === "admin" && <li>
