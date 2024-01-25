@@ -1,115 +1,69 @@
+import axios from "axios"
+import { useContext, useEffect, useState } from "react"
+import { AuthContext } from "../contexts/AuthContext"
+import {IoMdFootball} from 'react-icons/io'
+import {RiMovie2Fill, RiTeamFill} from 'react-icons/ri'
+import {PiTelevisionSimpleDuotone} from 'react-icons/pi'
+import {TbCategory} from 'react-icons/tb'
+import {TfiCup} from 'react-icons/tfi'
+import { IoIosFootball } from 'react-icons/io'
 
 function Home() {
+    const {token} = useContext(AuthContext)
+    const [data, setData] = useState<any>()
+    const arr = [
+        {name: "categorie", icon: <TbCategory className='text-6xl text-blue-600 p-1 ' />},
+        {name: "channels", icon: < PiTelevisionSimpleDuotone className='text-6xl text-blue-600 p-1 '/>},
+        {name: "movies", icon: <RiMovie2Fill className='text-6xl text-blue-600 p-1 '/>},
+        {name: "users", icon: <IoIosFootball className='text-6xl text-blue-600 p-1 '/>},
+        {name: "teams", icon: <RiTeamFill className='text-6xl text-blue-600 p-1 '/>},
+        {name: "leagues", icon: <TfiCup className='text-6xl text-blue-600 p-1 '/>},
+        {name: "matches", icon: <IoMdFootball className='text-6xl text-blue-600 p-1 '/>},
+        {name: "todayMatches", icon: <IoMdFootball className='text-6xl text-blue-600 p-1 '/>},
+
+    ]
+    const getData = async() => {
+        try {
+            const res = await axios.get(import.meta.env.VITE_API_URL+'/data',{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            setData(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+    } 
+
+    useEffect(()=>{
+        getData()
+    },[])
   return (
     
-    <div>
-        
-            
-{/* 
-            <div className="p-4 sm:ml-64">
-            <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-                <div className="grid grid-cols-3 gap-4 mb-4">
-                    <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-                        <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                        </p>
-                    </div>
-                    <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-                        <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                        </p>
-                    </div>
-                    <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-                        <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                        </p>
-                    </div>
-                </div>
-                <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-                    <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                    </p>
-                </div>
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                        <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                        </p>
-                    </div>
-                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                        <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                        </p>
-                    </div>
-                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                        <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                        </p>
-                    </div>
-                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                        <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                        </p>
-                    </div>
-                </div>
-                <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-                    <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                    </p>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                        <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                        </p>
-                    </div>
-                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                        <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                        </p>
-                    </div>
-                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                        <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                        </p>
-                    </div>
-                    <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-                        <p className="text-2xl text-gray-400 dark:text-gray-500">
-                        <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            </div> */}
-
+    <div className=" w-full">
+        <div className="w-full mx-auto  grid grid-cols-1 md:grid-cols-2 gap-3  place-items-center">
+            {
+                data && 
+                    arr.map((tee:any)=>(
+                        <Card tee={tee.name} value={data[tee.name]} Icon={tee.icon} />
+                    ))
+                
+            }
+        </div>
     </div>
   )
+}
+
+const Card = ({tee, value, Icon}:any) => {
+    return (
+        <div className="w-full  shadow-md rounded p-10 grid grid-cols-2 place-items-center">
+            <span className="text-center">
+            {Icon}
+            <span className="font-bold">{tee}</span>
+            </span>
+            <span className="font-black text-6xl">{value}</span>
+        </div>
+    )
 }
 
 export default Home
