@@ -1,7 +1,7 @@
 import {IoMdFootball} from 'react-icons/io'
 import {RiMovie2Fill, RiTeamFill} from 'react-icons/ri'
 import {PiTelevisionSimpleDuotone} from 'react-icons/pi'
-import {TbCategory, TbPlayFootball} from 'react-icons/tb'
+import {TbCategory} from 'react-icons/tb'
 import {TfiCup} from 'react-icons/tfi'
 import { Link } from "react-router-dom"
 import { useRef,useEffect } from "react"
